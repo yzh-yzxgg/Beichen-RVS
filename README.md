@@ -1,23 +1,8 @@
-<p align="center">
-  <a href="https://fm.the1068.pictures" target="_blank" rel="noopener noreferrer">
-    <img width="500" src="https://github.com/SMS-COSMO/the1068fm/assets/49156174/d8841777-5784-4db9-b306-bbcc4cc5cf88" alt="the1068fm logo">
-  </a>
-</p>
-
-<p align="center">
-A simple yet powerful song request system
-</p>
-
-<p align="center">
-  <a href="https://nuxt.com"><img src="https://img.shields.io/badge/Built%20With%20Nuxt-18181B?logo=nuxt.js" alt="Nuxt Website"></a>
-  <a href="https://github.com/SMS-COSMO/the1068fm/pulls"><img src="https://img.shields.io/badge/PRs-welcome-blue.svg" alt="PRs Welcome"></a>
-  <a href="https://stats.uptimerobot.com/AGNLNIrGM6"><img src="https://img.shields.io/uptimerobot/ratio/7/m795876635-3a8b812dbc51e838cfb3229a" alt="Uptime"></a>
-</p>
 
 ## Features
-- ✨ Effortlessly gather song requests from audience with our user-friendly interface.
-- 🕓 Real-time updates, stay up-to-date with the latest requests and changes in the playlist.
-- 💪 Hassle-free song management made easy with our automatic arrange system.
+- 🥵 Collect radio preferences from students with our voting system.
+- ![img](file:///C:\Users\yanzihan\AppData\Roaming\Tencent\QQTempSys\4B]GVXI$~A2%2IFQG50F7CE.png) Update daily, collect constantly and automatically generate radio playlists.
+- 💪 Let school radio management be easy with our systematic tool.
 
 ## Usage
 
@@ -42,8 +27,6 @@ A simple yet powerful song request system
 - [tRPC.io](https://trpc.io/) - End-to-end typesafe APIs made easy.
 - [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 
-## Contributing
-
 ### Local Setup
 
 Clone the repository and run on the root folder:
@@ -65,12 +48,16 @@ Run the scrips with `bun run xxx`.
 6. `db:push`: Push schema changes to database
 7. `db:createAdmin`: Create default user
 
-## Contributors
+## Acknowledgement
 
-<a href="https://github.com/sms-cosmo/the1068fm/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=sms-cosmo/the1068fm" />
-</a>
+Some of the open source code of fm1063 was used in the development of this project. Thanks to them!
+
+<p align="center">
+  <a href="https://github.com/SMS-COSMO/the1068fm" target="_blank" rel="noopener noreferrer">
+    <img width="500" src="https://github.com/SMS-COSMO/the1068fm/assets/49156174/d8841777-5784-4db9-b306-bbcc4cc5cf88" alt="the1068fm logo">
+  </a>
+</p>
 
 ## License
 
-[GPL v3](./LICENSE) &copy; 2023 the1068fm contributors
+[GPL v3](./LICENSE) &copy; 2024 Beichen-RVS contributors
