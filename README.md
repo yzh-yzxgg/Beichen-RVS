@@ -1,7 +1,7 @@
 
 ## Features
 - 🥵 Collect radio preferences from students with our voting system.
-- ![img](file:///C:\Users\yanzihan\AppData\Roaming\Tencent\QQTempSys\4B]GVXI$~A2%2IFQG50F7CE.png) Update daily, collect constantly and automatically generate radio playlists.
+- 🕓  Update daily, collect constantly and automatically generate radio playlists.
 - 💪 Let school radio management be easy with our systematic tool.
 
 ## Usage
