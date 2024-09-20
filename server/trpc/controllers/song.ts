@@ -29,9 +29,7 @@ export class SongController {
       ),
     );
 
-    if (lastSong.length)
-      return { success: false, message: '每周每人只能投一首歌哦' };
-    else if (sameSong.length && sameSong[0].status === 'used')
+    if (sameSong.length && sameSong[0].status === 'used')
       return { success: false, message: '上周放过的不能再投稿哦' };
     else if (sameSong.length)
       return { success: false, message: '本周已投稿的歌不能再投稿哦' };

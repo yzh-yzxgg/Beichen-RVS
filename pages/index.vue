@@ -84,7 +84,7 @@ definePageMeta({
 useHead({
   title: '北辰广播站点歌系统',
   meta: [
-    { name: 'description', content: '东营市一中北辰广播站点歌系统 Made by .' },
+    { name: 'description', content: '东营市一中北辰广播站点歌系统' },
   ],
   bodyAttrs: {
     class: 'm-0 min-w-screen',
