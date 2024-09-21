@@ -35,6 +35,9 @@ function isMine() {
       <div class="space-y-1 w-full">
         <UiCardTitle :class="`${compact ? 'text-lg' : ''} flex flex-row break-all`">
           {{ song?.name }}
+          <UiBadge class="rounded-md ml-2 self-center h-6 min-w-[66px]" variant="secondary">
+            想听：{{ song?.votesum }}
+          </UiBadge>
           <UiBadge v-if="isMine()" class="rounded-md ml-2 self-center h-6 min-w-[66px]" variant="secondary">
             我投稿的
           </UiBadge>
@@ -63,6 +66,7 @@ function isMine() {
       <div class="self-center ml-auto pl-3">
         <slot name="suffix" />
       </div>
+      
     </UiCardHeader>
   </UiCard>
 </template>

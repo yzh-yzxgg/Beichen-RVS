@@ -61,6 +61,19 @@ export const songRouter = router({
         throw new TRPCError({ code: 'BAD_REQUEST', message: res.message });
       else return res;
     }),
+  
+  voteSong : publicProcedure
+    .input(z.object({
+      id: z.string().min(1, '歌曲不存在'),
+      user: z.string().min(1, '用户不存在'),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      console.log(input);
+      const res = await ctx.songController.voteSong(input.id, input.user);
+      if (!res.success)
+        throw new TRPCError({ code: 'BAD_REQUEST', message: res.message });
+      else return res;
+    }),
 
   batchModifyStatus: protectedProcedure
     .input(z.object({

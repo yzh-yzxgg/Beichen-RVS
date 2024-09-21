@@ -35,7 +35,7 @@ export class SongController {
       return { success: false, message: '本周已投稿的歌不能再投稿哦' };
 
     try {
-      const id = (await db.insert(songs).values(newSong).returning({ id: songs.id }))[0].id;
+      const id = (await db.insert(songs).values({ ...newSong, votesum: 0 }).returning({ id: songs.id }))[0].id;
       return { success: true, res: id, message: '创建成功！' };
     } catch (err) {
       if (err instanceof LibsqlError && err.code === 'SQLITE_CONSTRAINT_PRIMARYKEY')
@@ -84,6 +84,36 @@ export class SongController {
     try {
       const res = await db.select().from(songs).where(gt(songs.createdAt, new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)));
       return { success: true, res, message: '获取成功' };
+    } catch (err) {
+      return { success: false, message: '服务器内部错误' };
+    }
+  }
+
+  async voteSong(id: string, session: string) {
+    try {
+      // 获取当前歌曲信息
+      const song = (await db.select().from(songs).where(eq(songs.id, id)))[0];
+      if (!song) {
+        return { success: false, message: '歌曲不存在' };
+      }
+
+      // 检查用户是否已经投票
+      const voteUsers = song.voteuser ? song.voteuser.split(',') : [];
+      if (voteUsers.includes(session)) {
+        return { success: false, message: '你已经投过票了' };
+      }
+
+      // 更新投票总数和投票用户列表
+      voteUsers.push(session);
+      const updatedVoteUser = voteUsers.join(',');
+      await db.update(songs)
+        .set({
+          votesum: song.votesum + 1,
+          voteuser: updatedVoteUser,
+        })
+        .where(eq(songs.id, id));
+
+      return { success: true, message: '投票成功' };
     } catch (err) {
       return { success: false, message: '服务器内部错误' };
     }

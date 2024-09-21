@@ -5,8 +5,26 @@ import { DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
 import { useDrag } from '@vueuse/gesture';
 import { useWindowFocus } from '@vueuse/core';
-import { getDateString } from '~/lib/utils';
-
+import { useUserStore } from '~/stores/user';
+import Cookies from 'js-cookie';
+import { getDateString } from '~/lib/utils';import {
+  ArrowDown,
+  ArrowDownRight,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpLeft,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  Loader2,
+  Plus,
+  Trash2,
+  Heart,
+  X,
+} from 'lucide-vue-next';
 const { $api } = useNuxtApp();
 
 const [isSubmitOpen, toggleSubmit] = useToggle(false);
@@ -30,12 +48,21 @@ const isDesktop = ref(false);
 onMounted(() => {
   // @ts-expect-error window
   isDesktop.value = window.innerWidth > 800 && window.innerHeight > 600;
+
+  // 检查是否存在名为 'session' 的 cookie
+  let sessionCookie = Cookies.get('session');
+  if (!sessionCookie) {
+    // 如果不存在，生成一个并设置为 'session' cookie
+    const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    Cookies.set('session', randomString, { expires: 7 }); // 设置 cookie 过期时间为 7 天
+ }
 });
 
 const canSubmit = ref(false);
 onMounted(() => {
   const userStore = useUserStore();
   canSubmit.value = userStore.canSubmit();
+
 });
 
 const selectedTab = ref('songList');
@@ -145,6 +172,17 @@ async function useRefreshData() {
     // swallow the errors
   }
 }
+async function voteSong(song: Song) {
+  try {
+    const session = Cookies.get('session'); // get the session cookie
+    console.log(song.id, session);
+    await $api.song.voteSong.mutate({ id: song.id, user: session });
+    console.log('voted');
+    song.votes++;
+  } catch (err) {
+    // swallow the errors
+  }
+}
 </script>
 
 <template>
@@ -215,7 +253,25 @@ async function useRefreshData() {
                 <UiInput v-model="searchContent" placeholder="搜索歌曲" class="text-md mb-2" />
                 <TransitionGroup name="list" tag="ul">
                   <li v-for="song in processedListData.slice(0, showLength)" :key="song.id">
-                    <MusicCard :song="song" show-mine />
+                    <MusicCard :song="song" show-mine>
+                      <template #suffix>
+                          <UiTooltipProvider>
+                            <UiTooltip>
+                              <UiTooltipTrigger as-child>
+                                <UiButton
+                                  class="basis-1/2 hover:bg-green-200 hover:border-green-400 hover:text-green-700"
+                                  variant="outline" size="icon" @click="voteSong(song)"
+                                >
+                                  <Heart class="w-4 h-4" />
+                                </UiButton>
+                              </UiTooltipTrigger>
+                              <UiTooltipContent>
+                                <p>想听</p>
+                              </UiTooltipContent>
+                            </UiTooltip>
+                          </UiTooltipProvider>
+                        </template>
+                    </MusicCard>
                   </li>
                 </TransitionGroup>
                 <UiAlert v-if="showLength < processedListData.length">
@@ -261,7 +317,25 @@ async function useRefreshData() {
             <UiScrollArea class="h-[calc(100svh-29rem)]">
               <TransitionGroup name="list" tag="ul">
                 <li v-for="song in processedListData.slice(0, showLength)" :key="song.id">
-                  <MusicCard :song="song" show-mine />
+                  <MusicCard :song="song" show-mine >
+                    <template #suffix>
+                          <UiTooltipProvider>
+                            <UiTooltip>
+                              <UiTooltipTrigger as-child>
+                                <UiButton
+                                  class="basis-1/2 hover:bg-green-200 hover:border-green-400 hover:text-green-700"
+                                  variant="outline" size="icon" @click="voteSong(song)"
+                                >
+                                  <Heart class="w-4 h-4" />
+                                </UiButton>
+                              </UiTooltipTrigger>
+                              <UiTooltipContent>
+                                <p>想听</p>
+                              </UiTooltipContent>
+                            </UiTooltip>
+                          </UiTooltipProvider>
+                        </template>
+                  </MusicCard>
                 </li>
               </TransitionGroup>
               <UiAlert v-if="showLength < processedListData.length">

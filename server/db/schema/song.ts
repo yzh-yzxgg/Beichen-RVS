@@ -12,4 +12,6 @@ export const songs = sqliteTable('songs', {
   type: text('type', { enum: ['normal', 'withMsg'] }).notNull(),
   message: text('message', { mode: 'text' }),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
+  votesum: integer('votesum', { mode: 'number' }).notNull(), // 新增字段：投票总数
+  voteuser: text('voteuser', { mode: 'text' }), // 新增字段：投票用户列表
 });
