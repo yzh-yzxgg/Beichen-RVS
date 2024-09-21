@@ -26,7 +26,7 @@ import { getDateString } from '~/lib/utils';import {
   X,
 } from 'lucide-vue-next';
 const { $api } = useNuxtApp();
-
+const { $toast } = useNuxtApp();
 const [isSubmitOpen, toggleSubmit] = useToggle(false);
 
 const { data: rawSongList } = await $api.song.listSafe.useQuery();
@@ -175,11 +175,11 @@ async function useRefreshData() {
 async function voteSong(song: Song) {
   try {
     const session = Cookies.get('session'); // get the session cookie
-    console.log(song.id, session);
     await $api.song.voteSong.mutate({ id: song.id, user: session });
-    console.log('voted');
+    $toast.success('投票成功！');
     song.votes++;
   } catch (err) {
+    $toast.error(err.message);
     // swallow the errors
   }
 }
