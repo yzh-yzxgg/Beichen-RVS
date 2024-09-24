@@ -22,20 +22,23 @@
             </NuxtLink>
             查看源代码。期待各位同学的反馈！
           </p>
-          <p>
-            策划：<b>闫子寒、石镇华、燕睿哲</b> | logo 设计：<b>燕睿哲。</b><br>
-
+          <p>            
             制作&运营：<b>闫子寒 (
               <NuxtLink to="https://github.com/yzh-yzxgg" class="font-bold">
                 yzxgg
               </NuxtLink>
             ) 。</b><br>
+            策划：<b>闫子寒、石镇华、燕睿哲</b> | logo 设计：<b>燕睿哲。</b><br>
+
           </p>
           <p>
-            特别的，项目开发使用了深圳中学风华子衿广播站 fm1063 线上点歌系统的部分开源代码 ，谨代表市一中全体开发人员对深圳中学学生无私奉献的开源精神表示由衷感谢！
+            特别的，项目开发使用了深圳中学风华子衿广播站 fm1063 线上点歌系统的部分开源代码，谨表达由衷感谢！
           </p>
           <p>
-            <b> PioneerAsso </b>是市一中学生首创的社团间合作组织，包括光影摄影协会、北辰广播站骨干成员，旨在通过合作实现学生创新项目
+            <b> PioneerAsso </b>是市一中学生首创的社团间合作组织，包括光影摄影协会、北辰广播站等社团的骨干成员，旨在通过合作实现学生创新项目。              
+            <NuxtLink to="https://agphotos.art" class="font-bold">
+                View More
+              </NuxtLink>
           </p>
         </section>
       </div>
