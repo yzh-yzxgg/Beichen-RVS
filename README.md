@@ -1,5 +1,6 @@
 
 ## Features
+- 😍 Add the “I want to listen” function to make it easier to select songs.
 - 🥵 Collect radio preferences from students with our voting system.
 - 🕓  Update daily, collect constantly and automatically generate radio playlists.
 - 💪 Let school radio management be easy with our systematic tool.
