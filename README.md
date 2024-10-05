@@ -51,7 +51,7 @@ Run the scrips with `bun run xxx`.
 
 ## Acknowledgement
 
-Some of the open source code of fm1063 was used in the development of this project. Thanks to them!
+Some of the open source code of fm1068 was used in the development of this project. Thanks to them!
 
 <p align="center">
   <a href="https://github.com/SMS-COSMO/the1068fm" target="_blank" rel="noopener noreferrer">
