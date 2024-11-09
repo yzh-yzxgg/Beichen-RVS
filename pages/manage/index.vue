@@ -578,6 +578,9 @@ onMounted(async () => {
             @update:checked="changeVisibility(arrangement?.date, !arrangement?.isPublic)"
           />
         </div>
+        <UiButton variant="secondary" class="self-center my-[-10px] ml-auto" @click="navigateTo('/manage/play')">
+          进入播放模式
+        </UiButton>
       </UiCardHeader>
       <UiCardContent class="px-4 lg:px-6">
         <UiTooltipProvider v-if="arrangement === undefined">
