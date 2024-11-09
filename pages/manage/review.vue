@@ -48,9 +48,12 @@ const selectedSong = ref<TSong>();
 const searchLoading = ref(false);
 const searchListCache = ref<Map<string, any>>(new Map());
 const searchList = ref();
+const tempList = ref();
 async function setSearchList() {
   searchLoading.value = true;
-  searchList.value = await getSearchList(selectedSong.value);
+  tempList.value = await getSearchList(selectedSong.value);
+  searchList.value = [tempList.value];
+  console.log(searchList);
   searchLoading.value = false;
 }
 async function getSearchList(song?: TSong) {
@@ -64,18 +67,23 @@ async function getSearchList(song?: TSong) {
   formData.append('input', name);
   formData.append('filter', 'name');
   formData.append('type', 'netease');
-
-  const res: any = (await useFetch('/liuzhijin', {
-    method: 'post',
-    body: formData,
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest',
-    },
-    mode: 'cors',
-  })).data;
-
+  console.log(name);
+  const res: any = (await useFetch('https://api.lolimi.cn/API/qqdg/?word='+name+'&n=1',)).data._rawValue;
   // Store cache
-  const data = JSON.parse(res.value).data;
+  console.log(res);
+  const data = res.data;
+  // for (const item of data.song.list) {
+  //   // 根据 item 的属性（例如 songmid）来生成请求 URL
+  //       const res = await useFetch(`http://localhost:3200/getMusicPlay?songmid=${item.songmid}`);
+
+  //     // 从响应中提取所需的 URL
+  //       const playUrlObj = res.data._rawValue.data.playUrl;
+  //       const firstKey = Object.keys(playUrlObj)[0]; // 获取第一个键名
+  //       item.url = playUrlObj[firstKey].url;         // 访问 .url
+  //     console.log(item.url);
+  //     console.log(data);
+  // }
+  console.log(data);
   searchListCache.value.set(name, data);
   return data;
 };
@@ -239,7 +247,7 @@ onMounted(async () => {
       <UiCardContent class="px-4 lg:px-6">
         <UiScrollArea class="lg:h-[calc(100vh-10rem)]">
           <template v-if="!searchLoading">
-            <div v-for="song in searchList" :key="song">
+            <div v-for="song in searchList" :key="albumid">
               <MusicPlayerCard :song="song" :compact="!isDesktop" />
             </div>
           </template>

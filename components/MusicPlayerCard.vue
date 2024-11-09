@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   compact: false,
 });
-
+console.log(props.song);
 const audio = ref();
 const { playing, currentTime, duration, volume } = useMediaControls(audio, {
   src: props.song.url,
@@ -52,7 +52,7 @@ onMounted(() => {
         <div class="space-y-1 w-full">
           <UiCardTitle>
             <span :class="`${compact ? 'text-lg' : ''}`">
-              {{ song.title }}
+              {{ song.song }}
             </span>
             <div class="float-right">
               <UiTooltipProvider v-if="isError">
@@ -78,7 +78,7 @@ onMounted(() => {
             </div>
           </UiCardTitle>
           <UiCardDescription>
-            {{ song.author }}
+            {{ song.singer }}
             <audio ref="audio" />
             <div class="flex align-middle">
               <UiButton variant="ghost" size="icon" class="h-8 ml-[-8px] mr-1 text-slate-950" @click="playing = !playing">
