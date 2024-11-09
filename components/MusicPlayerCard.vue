@@ -68,7 +68,7 @@ onMounted(() => {
               <UiTooltipProvider>
                 <UiTooltip>
                   <UiTooltipTrigger as-child>
-                    <a :href="song.link" class="icon-[tabler--link] text-base lg:text-lg cursor-pointer ml-2" />
+                    <a :href="song.link" target="_blank" class="icon-[tabler--link] text-base lg:text-lg cursor-pointer ml-2" />
                   </UiTooltipTrigger>
                   <UiTooltipContent>
                     <p>跳转到原链接</p>

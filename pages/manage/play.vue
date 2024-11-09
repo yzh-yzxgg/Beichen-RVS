@@ -53,6 +53,8 @@ try {
   navigateTo('/manage/login');
 }
 
+
+
 type TArrange = 'day' | 'week';
 const autoArrangeScopeText = {
   day: '一天',
@@ -171,11 +173,11 @@ async function getSearchList(song?: TSong) {
   formData.append('type', 'netease');
   console.log(name);
   const results: any[] = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 2; i++) {
     const res: any = (await useFetch(`https://api.lolimi.cn/API/qqdg/?word=${name}&n=${i}`)).data._rawValue;
     results.push(res.data);
   }
-  console.log(results); // 输出包含3个请求结果的数组
+  console.log(results); // 输出包含2个请求结果的数组
   // Store cache
   const data = results;
   console.log(data);
@@ -270,11 +272,10 @@ async function getSearchList(song?: TSong) {
       </UiCardContent>
     </UiCard>
 
-    <UiCard class="basis-3/4 pt-4">
+    <UiCard class="basis-3/4 pt-4">        
       <UiCardHeader class="items-start gap-4 space-y-0 flex-row px-4 pt-3 lg:px-6 lg:pt-6">
-        <UiCardTitle class="flex flex-row">        
           <div class="space-y-1">
-            <UiCardTitle class="flex flex-row">          
+            <UiCardTitle class="flex flex-row">
               <span class="icon-[tabler--headphones] mr-2" />
               歌曲试听
             </UiCardTitle>
@@ -282,7 +283,6 @@ async function getSearchList(song?: TSong) {
           <UiButton variant="secondary" class="self-center my-[-10px] ml-auto" @click="navigateTo('/manage')">
             返回排歌模式
           </UiButton>
-        </UiCardTitle>
       </UiCardHeader>
       <UiCardContent class="px-4 lg:px-6">
         <UiScrollArea class="lg:h-[calc(100vh-10rem)]">

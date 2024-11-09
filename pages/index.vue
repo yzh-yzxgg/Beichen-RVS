@@ -183,6 +183,17 @@ async function voteSong(song: Song) {
     // swallow the errors
   }
 }
+let userVariable=0;
+try {
+    console.log('verifyUser');
+    await $api.user.tokenValidity.query();
+    songList.value = await $api.song.listUnused.query() ?? [];
+    arrangementList.value = await $api.arrangement.list.query() ?? [];
+    userVariable=1;
+  } catch (err) {
+    userVariable=0;
+  }
+  
 </script>
 
 <template>
@@ -353,11 +364,20 @@ async function voteSong(song: Song) {
         </UiCard>
       </div>
       <UiCard class="hidden lg:block mt-10">
-        <UiCardHeader>
-          <UiCardTitle>
-            歌单
-          </UiCardTitle>
-        </UiCardHeader>
+        <UiCardHeader class="items-start gap-4 space-y-0 flex-row px-4 pt-3 lg:px-6 lg:pt-6">
+          <div class="space-y-1">
+            <UiCardTitle class="flex flex-row">
+              歌单
+            </UiCardTitle>
+          </div>
+          <UiButton 
+            v-if="userVariable==1" 
+            variant="secondary" 
+            class="self-center my-[-10px] ml-auto" 
+            @click="navigateTo('/manage/play')">
+            进入播放模式
+          </UiButton>
+      </UiCardHeader>
         <UiCardContent>
           <DatePicker
             v-model="selectedDate" mode="date" view="weekly" expanded title-position="left" locale="zh"
