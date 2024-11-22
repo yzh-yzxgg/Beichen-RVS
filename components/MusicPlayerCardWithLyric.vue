@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
 console.log(props.song);
 const audio = ref();
 const { playing, currentTime, duration, volume } = useMediaControls(audio, {
-  src: props.song.url,
+  src: props.song.mp3,
 });
 const sliderTime = computed({
   get: () => [currentTime.value],
@@ -43,7 +43,7 @@ onMounted(() => {
       <UiCardHeader class="items-start lg:gap-4 space-y-0 flex-row py-4 lg:py-6">
         <div class="w-18 lg:mr-3 flex flex-col gap-1">
           <UiAvatar v-if="!compact" class="rounded-sm h-20 w-20">
-            <UiAvatarImage :src="song.cover" :alt="song.song" />
+            <UiAvatarImage :src="song.img" :alt="song.name" />
             <UiAvatarFallback>
               <span class="icon-[tabler--help-square] text-3xl text-slate-400" />
             </UiAvatarFallback>
@@ -52,7 +52,7 @@ onMounted(() => {
         <div class="space-y-1 w-full">
           <UiCardTitle>
             <span :class="`${compact ? 'text-lg' : ''}`">
-              {{ song.song }}
+              {{ song.name }}
             </span>
             <div class="float-right">
               <UiTooltipProvider v-if="isError">
@@ -78,7 +78,7 @@ onMounted(() => {
             </div>
           </UiCardTitle>
           <UiCardDescription>
-            {{ song.singer }}
+            {{ song.author }}
             <audio ref="audio" />
             <div class="flex align-middle">
               <UiButton variant="ghost" size="icon" class="h-8 ml-[-8px] mr-1 text-slate-950" @click="playing = !playing">
@@ -96,6 +96,15 @@ onMounted(() => {
               <span class="self-center ml-3">
                 {{ getTime(duration) }}
               </span>
+            </div>
+            <!-- 歌词展示区域 -->
+            <div class="mt-4">
+                <h4 class="text-lg font-bold">歌词</h4>
+                <ul class="list-none">
+                <li v-for="line in song.lyric" :key="line.time" class="py-1">
+                    <span class="ml-2">{{ line.name }}</span>
+                </li>
+                </ul>
             </div>
           </UiCardDescription>
         </div>

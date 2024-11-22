@@ -277,7 +277,7 @@ async function getSearchList(song?: TSong) {
           <div class="space-y-1">
             <UiCardTitle class="flex flex-row">
               <span class="icon-[tabler--headphones] mr-2" />
-              歌曲试听
+              歌曲播放
             </UiCardTitle>
           </div>
           <UiButton variant="secondary" class="self-center my-[-10px] ml-auto" @click="navigateTo('/manage')">

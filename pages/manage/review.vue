@@ -5,6 +5,7 @@ import {
   Trash2,
   X,
 } from 'lucide-vue-next';
+import MusicPlayerCardWithLyric from '~/components/MusicPlayerCardWithLyric.vue';
 import type { TSong, TSongList, TStatus } from '~/types';
 
 const { $api } = useNuxtApp();
@@ -68,10 +69,10 @@ async function getSearchList(song?: TSong) {
   formData.append('filter', 'name');
   formData.append('type', 'netease');
   console.log(name);
-  const res: any = (await useFetch('https://api.lolimi.cn/API/qqdg/?word='+name+'&n=1',)).data._rawValue;
+  const res: any = (await useFetch('https://api.lolimi.cn/API/wydg/?msg='+name+'&n=1',)).data._rawValue;
   // Store cache
   console.log(res);
-  const data = res.data;
+  const data = res;
   // for (const item of data.song.list) {
   //   // 根据 item 的属性（例如 songmid）来生成请求 URL
   //       const res = await useFetch(`http://localhost:3200/getMusicPlay?songmid=${item.songmid}`);
@@ -248,7 +249,7 @@ onMounted(async () => {
         <UiScrollArea class="lg:h-[calc(100vh-10rem)]">
           <template v-if="!searchLoading">
             <div v-for="song in searchList" :key="albumid">
-              <MusicPlayerCard :song="song" :compact="!isDesktop" />
+              <MusicPlayerCardWithLyric :song="song" :compact="!isDesktop" />
             </div>
           </template>
           <template v-if="searchLoading && selectedSong">
