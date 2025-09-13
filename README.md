@@ -1,3 +1,4 @@
+Designed by Ruizhe Yan， Zihan Yan
 
 ## Features
 - 😍 Add the “I want to listen” function to make it easier to select songs.
